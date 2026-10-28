@@ -4,7 +4,7 @@ import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, r2_score
 
 # 1. Load the dataset
 df = pd.read_csv("data/student_performance.csv")
@@ -32,10 +32,12 @@ predictions = model.predict(X_test)
 
 # 7. Evaluate the model
 mae = mean_absolute_error(y_test, predictions)
+r2 = r2_score(y_test, predictions)
 
 print("\nActual marks:", y_test.tolist())
 print("Predicted marks:", predictions.round(2).tolist())
 print("Mean Absolute Error (MAE):", round(mae, 2))
+print("R2 Score:", round(r2, 2))
 
 # 8. Save the trained model
 joblib.dump(model, "models/student_performance_model.pkl")
